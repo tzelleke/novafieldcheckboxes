@@ -2,7 +2,7 @@
     <panel-item :field="field">
         <p slot="value" class="text-90 flex">
             <span
-                :style="{columnCount: this.field.columns}"
+                :style="{columnCount: field.columns}"
                 class="w-full max-col-2"
             >
                 <div
