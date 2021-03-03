@@ -8,11 +8,13 @@
                 <div
                     v-for="(label, option) in field.options"
                     :key="option"
-                    class="flex mb-2"
+                    class="flex mb-2 pt-1"
+                    :class="{disabled: isDisabled(option)}"
                 >
                     <checkbox
                         :value="option"
                         :checked="isChecked(option)"
+                        :disabled="isDisabled(option)"
                         @input="toggleOption(option)"
                         class="mr-2"
                     />
@@ -44,7 +46,12 @@ export default {
             return this.value ? this.value.includes(option) : false
         },
 
+        isDisabled(option) {
+            return this.field.disabled ? this.field.disabled.includes(option) : false
+        },
+
         toggleOption(option) {
+            if (this.isDisabled(option)) {return}
             if (this.isChecked(option)) {
                 this.$set(this, 'value', this.value.filter(item => item != option))
 
@@ -84,5 +91,8 @@ export default {
         -webkit-column-count: 2;
         column-count: 2;
         white-space: nowrap;
+    }
+    .disabled {
+        opacity: .5;
     }
 </style>
